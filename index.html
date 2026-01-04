@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AA Study Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Crimson+Pro:wght@300;400;500;600;700&family=Pinyon+Script&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true">
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+  </div>
+
+  <div class="app-shell">
+    <header class="app-header slim">
+      <div class="top-bar">
+        <div class="brand-mark">AA Study Library</div>
+        <nav id="topNav" class="top-nav" aria-label="Library">
+          <button id="navSteps" class="nav-item" type="button" data-source="steps">Steps</button>
+          <button id="navBigBook" class="nav-item" type="button" data-source="bbook">Big Book</button>
+          <button id="navTraditions" class="nav-item" type="button" data-source="traditions">Traditions</button>
+          <button id="navDaily" class="nav-item icon" type="button" data-source="daily" aria-label="Daily reflections">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <rect x="3" y="4" width="18" height="17" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2" />
+              <line x1="3" y1="9" x2="21" y2="9" stroke="currentColor" stroke-width="2" />
+              <line x1="8" y1="2.5" x2="8" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <line x1="16" y1="2.5" x2="16" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </button>
+        </nav>
+        <div id="statusLine" class="status-pill">Loading library...</div>
+      </div>
+    </header>
+
+    <section id="dropdownArea" class="dropdown-area">
+      <div id="dropdownSteps" class="dropdown-panel" aria-label="Steps contents">
+        <div class="dropdown-header">Steps</div>
+        <div id="stepsList" class="dropdown-list"></div>
+      </div>
+      <div id="dropdownBigBook" class="dropdown-panel" aria-label="Big Book contents">
+        <div class="dropdown-header">Big Book</div>
+        <div id="bbookList" class="dropdown-list"></div>
+      </div>
+      <div id="dropdownTraditions" class="dropdown-panel" aria-label="Traditions contents">
+        <div class="dropdown-header">Traditions</div>
+        <div id="traditionsList" class="dropdown-list"></div>
+      </div>
+      <div id="dropdownDaily" class="dropdown-panel" aria-label="Daily reflections contents">
+        <div class="dropdown-header">Daily Reflections</div>
+        <div id="dailyMonthStrip" class="month-strip"></div>
+        <div id="dailyDayList" class="day-list compact"></div>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <form id="searchForm" class="search-bar" autocomplete="off">
+        <input id="searchInput" type="search" placeholder="Search across the library" />
+        <button class="primary" type="submit">Search</button>
+        <button id="clearSearchBtn" class="ghost" type="button">Clear</button>
+      </form>
+      <div class="toolbar-right">
+        <div id="searchSummary" class="search-summary">Search across all sources.</div>
+        <div class="data-actions">
+          <button id="refreshBtn" class="ghost" type="button">Refresh</button>
+          <label class="file-btn">
+            Choose data folder
+            <input id="folderInput" type="file" webkitdirectory directory multiple />
+          </label>
+          <label class="file-btn ghost">
+            Choose JSON files
+            <input id="fileInput" type="file" accept=".json" multiple />
+          </label>
+        </div>
+        <div id="localFallback" class="local-fallback hidden">
+          <p id="localFallbackMessage" class="panel-note"></p>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-grid">
+      <section class="panel reader">
+        <div class="reader-header">
+          <div class="reader-kicker" id="activeKicker"></div>
+          <h2 id="activeTitle" class="reader-title">Select a shelf</h2>
+          <div id="activeMeta" class="reader-meta"></div>
+        </div>
+        <article id="content" class="reader-content" tabindex="0"></article>
+      </section>
+
+      <aside class="panel results">
+        <div class="panel-header">
+          <h2>Search Results</h2>
+        </div>
+        <div id="resultsList" class="results-list"></div>
+      </aside>
+    </main>
+  </div>
+
+  <noscript class="noscript">This app needs JavaScript enabled to load the library.</noscript>
+  <script src="app.js"></script>
+</body>
+</html>
