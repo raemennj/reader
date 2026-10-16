@@ -182,5 +182,56 @@
     target.appendChild(group);
   }
   window.AAStudyV2 = { goToPrintedPage, layers };
-  document.addEventListener("DOMContentLoaded",()=>{setupPages();setupHighlightControls();});
+  function installReflectionTooltips(){
+    const tip=document.createElement("div");
+    tip.className="daily-date-tooltip";
+    tip.hidden=true;
+    tip.setAttribute("role","tooltip");
+    document.body.appendChild(tip);
+    let active=null;
+    function close(){
+      tip.hidden=true;
+      active=null;
+    }
+    document.addEventListener("click",(e)=>{
+      const mark=e.target?.closest?.("#content mark.crossref");
+      if(!mark){ if(!tip.contains(e.target))close(); return; }
+      if(active===mark&&!tip.hidden){ close();return; }
+      active=mark;
+      tip.textContent=mark.title||"Daily Reflections excerpt";
+      tip.hidden=false;
+      const rect=mark.getBoundingClientRect();
+      const width=Math.min(320,window.innerWidth-24);
+      tip.style.width=width+"px";
+      const left=Math.max(12,Math.min(rect.left,window.innerWidth-width-12));
+      tip.style.left=left+"px";
+      const below=window.innerHeight-rect.bottom>90;
+      tip.style.top=(below?rect.bottom+8:Math.max(12,rect.top-60))+"px";
+    });
+    document.addEventListener("keydown",(e)=>{if(e.key==="Escape")close();});
+    window.addEventListener("scroll",close,{passive:true});
+    const content=document.getElementById("content");
+    if(content){
+      let frame=null;
+      const enhance=()=>{
+        frame=null;
+        content.querySelectorAll("mark.crossref:not([tabindex])").forEach(m=>{
+          m.tabIndex=0;
+          m.setAttribute("role","button");
+          m.setAttribute("aria-label",m.title||"Daily Reflections date");
+        });
+      };
+      content.addEventListener("keydown",(e)=>{
+        if((e.key==="Enter"||e.key===" ")&&e.target.matches("mark.crossref")){
+          e.preventDefault();e.target.click();
+        }
+      });
+      new MutationObserver(()=>{
+        if(frame!==null)return;
+        frame=requestAnimationFrame(enhance);
+      }).observe(content,{childList:true,subtree:true});
+      enhance();
+    }
+  }
+  document.addEventListener("DOMContentLoaded",()=>{setupPages();setupHighlightControls();installReflectionTooltips();});
 })();
