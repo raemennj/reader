@@ -35,6 +35,19 @@
       if (pageNum !== null) {
         bbChapters.forEach(function (entry, i) { if (pageNum >= entry[0]) which = i + 1; });
       }
+      // Keep the later stories navigable without rendering hundreds of pages at once.
+      // 171 onward may include a gap after the first 164 printed pages.
+      if (pageNum !== null && pageNum >= 165) {
+        var start = 165 + Math.floor((pageNum - 165) / 20) * 20;
+        var id = "bbook-post-" + start;
+        var found = sections.find(function (item) { return item.id === id; });
+        if (!found) {
+          found = {id:id, heading:"Later stories & appendices · pp. " + start + "–" + (start+19),
+            paragraphs:[],pageNumbers:[],meta:{type:"stories",startPage:start}};
+          sections.push(found);
+        }
+        which = sections.indexOf(found);
+      }
       var sec = sections[which];
       (page.blocks || []).forEach(function (block) {
         if (["page_number", "running_head"].includes(block.type)) return;
