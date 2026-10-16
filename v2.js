@@ -181,5 +181,6 @@
     });
     target.appendChild(group);
   }
+  window.AAStudyV2 = { goToPrintedPage, layers };
   document.addEventListener("DOMContentLoaded",()=>{setupPages();setupHighlightControls();});
 })();
