@@ -135,3 +135,20 @@
   .print-page-form { padding: 7px; gap: 5px; }
   .print-page-form input { width: 65px; }
 }
+#content mark.crossref { cursor: pointer; }
+#content mark.crossref:focus-visible { outline: 2px solid #27754f; outline-offset: 2px; }
+.daily-date-tooltip {
+  position: fixed;
+  z-index: 12000;
+  border: 1px solid rgba(39,84,60,.28);
+  border-radius: 12px;
+  padding: 11px 13px;
+  font-family: system-ui,sans-serif;
+  font-size: .88rem;
+  background: #fbfef9;
+  color: #1b3d2e;
+  box-shadow: 0 10px 30px rgba(20,45,30,.23);
+  line-height: 1.4;
+  pointer-events: none;
+}
+.daily-date-tooltip[hidden] { display: none !important; }
