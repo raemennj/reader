@@ -1,0 +1,613 @@
+{
+  "schema": "aa-study-lens/v1",
+  "source": "Alcoholics Anonymous, Fourth Edition, pp. 1–164",
+  "editorialNote": "Independent interpretive study notes, not A.A. headings or official text. Page numbers indicate useful starting points; they are not verified sentence-level boundaries. No book text is included.",
+  "majorPivot": 44,
+  "types": [
+    {
+      "id": "problem",
+      "label": "Problem",
+      "color": "#e9aa9f"
+    },
+    {
+      "id": "failed",
+      "label": "Failed attempts",
+      "color": "#e4b27f"
+    },
+    {
+      "id": "turn",
+      "label": "Turning point",
+      "color": "#edc95a"
+    },
+    {
+      "id": "solution",
+      "label": "Solution",
+      "color": "#9fc9eb"
+    },
+    {
+      "id": "action",
+      "label": "Action",
+      "color": "#c3b0ef"
+    },
+    {
+      "id": "promise",
+      "label": "Promises",
+      "color": "#9fdbd5"
+    },
+    {
+      "id": "warning",
+      "label": "Warnings",
+      "color": "#e4b1bb"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "bills-story",
+      "title": "Bill's Story",
+      "start": 1,
+      "end": 16,
+      "entries": [
+        {
+          "id": "bills-story-0",
+          "page": 2,
+          "type": "problem",
+          "label": "Drinking grows beyond Bill's control",
+          "note": "The early story develops loss of control and the narrowing options of alcoholism.",
+          "anchor": "drinking"
+        },
+        {
+          "id": "bills-story-1",
+          "page": 6,
+          "type": "failed",
+          "label": "Willpower and promises fail",
+          "note": "Resolve, fear, and consequences are not enough to sustain sobriety.",
+          "anchor": "quit"
+        },
+        {
+          "id": "bills-story-2",
+          "page": 12,
+          "type": "turn",
+          "label": "A new spiritual possibility",
+          "note": "Ebby's visit opens a different approach: Bill need not accept somebody else's fixed conception of God.",
+          "anchor": "conception"
+        },
+        {
+          "id": "bills-story-3",
+          "page": 13,
+          "type": "solution",
+          "label": "An inward change begins",
+          "note": "Bill's account shifts toward a spiritual experience and a new outlook.",
+          "anchor": "experience"
+        },
+        {
+          "id": "bills-story-4",
+          "page": 14,
+          "type": "action",
+          "label": "Carry the message onward",
+          "note": "The narrative moves from personal change to helping others.",
+          "anchor": "help"
+        }
+      ]
+    },
+    {
+      "id": "there-is-a-solution",
+      "title": "There Is a Solution",
+      "start": 17,
+      "end": 29,
+      "entries": [
+        {
+          "id": "there-is-a-solution-0",
+          "page": 18,
+          "type": "solution",
+          "label": "A shared experience of recovery",
+          "note": "The fellowship offers a common experience rather than another isolated attempt to quit.",
+          "anchor": "spiritual"
+        },
+        {
+          "id": "there-is-a-solution-1",
+          "page": 20,
+          "type": "problem",
+          "label": "The real alcoholic distinguished",
+          "note": "The book separates heavy drinking and ordinary choices from the loss of control it is describing.",
+          "anchor": "alcoholic"
+        },
+        {
+          "id": "there-is-a-solution-2",
+          "page": 24,
+          "type": "failed",
+          "label": "No reliable mental defense",
+          "note": "Knowledge and memory of earlier disasters may fail at the decisive moment.",
+          "anchor": "defense"
+        },
+        {
+          "id": "there-is-a-solution-3",
+          "page": 25,
+          "type": "turn",
+          "label": "A solution beyond self-control",
+          "note": "The argument turns from failed personal defense to the possibility of a profound change.",
+          "anchor": "solution"
+        },
+        {
+          "id": "there-is-a-solution-4",
+          "page": 28,
+          "type": "action",
+          "label": "An invitation to examine the approach",
+          "note": "The reader is invited to consider the spiritual basis described in the next chapter.",
+          "anchor": "spiritual"
+        }
+      ]
+    },
+    {
+      "id": "more-about-alcoholism",
+      "title": "More About Alcoholism",
+      "start": 30,
+      "end": 43,
+      "entries": [
+        {
+          "id": "more-about-alcoholism-0",
+          "page": 30,
+          "type": "problem",
+          "label": "Conceding powerlessness",
+          "note": "Denial and the desire to drink normally occupy the opening discussion.",
+          "anchor": "normal"
+        },
+        {
+          "id": "more-about-alcoholism-1",
+          "page": 31,
+          "type": "failed",
+          "label": "Experiments in control",
+          "note": "Strategies for regulating alcohol are tested and found unreliable for the alcoholic.",
+          "anchor": "control"
+        },
+        {
+          "id": "more-about-alcoholism-2",
+          "page": 35,
+          "type": "problem",
+          "label": "The peculiar mental blank spot",
+          "note": "Personal stories illustrate how the first drink can appear reasonable despite consequences.",
+          "anchor": "first"
+        },
+        {
+          "id": "more-about-alcoholism-3",
+          "page": 42,
+          "type": "turn",
+          "label": "What the cases have established",
+          "note": "The accumulated stories lead toward the admission that self-knowledge is not a sufficient defense.",
+          "anchor": "defense"
+        },
+        {
+          "id": "more-about-alcoholism-4",
+          "page": 43,
+          "type": "solution",
+          "label": "Defense must come from a higher power",
+          "note": "The chapter closes by pointing beyond the individual's own resources.",
+          "anchor": "higher power"
+        }
+      ]
+    },
+    {
+      "id": "we-agnostics",
+      "title": "We Agnostics",
+      "start": 44,
+      "end": 57,
+      "entries": [
+        {
+          "id": "we-agnostics-0",
+          "page": 44,
+          "type": "turn",
+          "label": "The book's major turn: diagnosis to remedy",
+          "note": "The first three chapters described the dilemma. Here the book explicitly introduces the spiritual remedy.",
+          "anchor": "spiritual experience"
+        },
+        {
+          "id": "we-agnostics-1",
+          "page": 45,
+          "type": "problem",
+          "label": "Lack of power",
+          "note": "The central dilemma is described as a shortage of power, rather than a shortage of information.",
+          "anchor": "power"
+        },
+        {
+          "id": "we-agnostics-2",
+          "page": 47,
+          "type": "solution",
+          "label": "Begin with your own conception",
+          "note": "The barrier is lowered: an initial willingness to believe can be a beginning.",
+          "anchor": "conception"
+        },
+        {
+          "id": "we-agnostics-3",
+          "page": 50,
+          "type": "failed",
+          "label": "Old ideas and prejudices block the way",
+          "note": "Fixed assumptions are examined as obstacles to a new experience.",
+          "anchor": "prejudice"
+        },
+        {
+          "id": "we-agnostics-4",
+          "page": 55,
+          "type": "action",
+          "label": "Look within and become willing",
+          "note": "The chapter calls for openness and a search for a spiritual foundation.",
+          "anchor": "willing"
+        }
+      ]
+    },
+    {
+      "id": "how-it-works",
+      "title": "How It Works",
+      "start": 58,
+      "end": 71,
+      "entries": [
+        {
+          "id": "how-it-works-0",
+          "page": 58,
+          "type": "warning",
+          "label": "Willingness and honesty matter",
+          "note": "The chapter opens by stressing the conditions under which the approach has worked.",
+          "anchor": "honest"
+        },
+        {
+          "id": "how-it-works-1",
+          "page": 59,
+          "type": "turn",
+          "label": "From surrender to the Twelve Steps",
+          "note": "The writing crosses from admitting failure into a specific program of action.",
+          "anchor": "steps"
+        },
+        {
+          "id": "how-it-works-2",
+          "page": 61,
+          "type": "problem",
+          "label": "Self-will in the director's chair",
+          "note": "The actor analogy shows how attempts to manage everyone and everything produce conflict.",
+          "anchor": "actor"
+        },
+        {
+          "id": "how-it-works-3",
+          "page": 62,
+          "type": "turn",
+          "label": "Self-centeredness identified; reliance introduced",
+          "note": "The text makes a sharp diagnosis and then redirects the reader toward a different source of help.",
+          "anchor": "self-centeredness"
+        },
+        {
+          "id": "how-it-works-4",
+          "page": 63,
+          "type": "action",
+          "label": "Third Step decision",
+          "note": "The remedy becomes an actual decision and a stated commitment.",
+          "anchor": "decision"
+        },
+        {
+          "id": "how-it-works-5",
+          "page": 64,
+          "type": "action",
+          "label": "Make a searching inventory",
+          "note": "The Fourth Step moves the change from intention into written examination.",
+          "anchor": "inventory"
+        },
+        {
+          "id": "how-it-works-6",
+          "page": 67,
+          "type": "solution",
+          "label": "Resentment examined differently",
+          "note": "Attention moves from other people's conduct to the reader's own part and response.",
+          "anchor": "resentment"
+        },
+        {
+          "id": "how-it-works-7",
+          "page": 68,
+          "type": "action",
+          "label": "Face fears directly",
+          "note": "The inventory turns to fear, its causes, and a different response.",
+          "anchor": "fear"
+        },
+        {
+          "id": "how-it-works-8",
+          "page": 69,
+          "type": "action",
+          "label": "Examine relationships and conduct",
+          "note": "The inventory expands to sex and personal relationships.",
+          "anchor": "sex"
+        }
+      ]
+    },
+    {
+      "id": "into-action",
+      "title": "Into Action",
+      "start": 72,
+      "end": 88,
+      "entries": [
+        {
+          "id": "into-action-0",
+          "page": 72,
+          "type": "action",
+          "label": "Prepare to tell the truth",
+          "note": "The Fifth Step brings inventory into a conversation with another person.",
+          "anchor": "step"
+        },
+        {
+          "id": "into-action-1",
+          "page": 75,
+          "type": "turn",
+          "label": "After confession, into readiness",
+          "note": "The narrative pivots from disclosure to preparation for further change.",
+          "anchor": "ready"
+        },
+        {
+          "id": "into-action-2",
+          "page": 76,
+          "type": "action",
+          "label": "Six, Seven, Eight, and Nine become concrete",
+          "note": "Readiness, asking for help, and making amends lead into specific conduct.",
+          "anchor": "amends"
+        },
+        {
+          "id": "into-action-3",
+          "page": 83,
+          "type": "promise",
+          "label": "Results of making amends",
+          "note": "The text describes the changes expected from doing this work.",
+          "anchor": "promises"
+        },
+        {
+          "id": "into-action-4",
+          "page": 84,
+          "type": "turn",
+          "label": "From repair to daily maintenance",
+          "note": "After the promises the program becomes an ongoing practice of inventory and correction.",
+          "anchor": "continue"
+        },
+        {
+          "id": "into-action-5",
+          "page": 85,
+          "type": "action",
+          "label": "Conscious contact as a daily practice",
+          "note": "Prayer and meditation are described as practices rather than abstractions.",
+          "anchor": "prayer"
+        }
+      ]
+    },
+    {
+      "id": "working-with-others",
+      "title": "Working With Others",
+      "start": 89,
+      "end": 103,
+      "entries": [
+        {
+          "id": "working-with-others-0",
+          "page": 89,
+          "type": "solution",
+          "label": "Service stabilizes recovery",
+          "note": "Helping another alcoholic becomes central to continued growth.",
+          "anchor": "alcoholic"
+        },
+        {
+          "id": "working-with-others-1",
+          "page": 90,
+          "type": "action",
+          "label": "Approach another alcoholic practically",
+          "note": "The chapter gives concrete instructions about how to make contact.",
+          "anchor": "man"
+        },
+        {
+          "id": "working-with-others-2",
+          "page": 94,
+          "type": "warning",
+          "label": "Do not push or preach",
+          "note": "The message is to be offered without pressure or arguments.",
+          "anchor": "argument"
+        },
+        {
+          "id": "working-with-others-3",
+          "page": 96,
+          "type": "turn",
+          "label": "Let the other person choose",
+          "note": "The approach changes from persuading someone to respecting their readiness.",
+          "anchor": "willing"
+        },
+        {
+          "id": "working-with-others-4",
+          "page": 100,
+          "type": "action",
+          "label": "Practice the principles in ordinary life",
+          "note": "Carrying the message connects back to responsibilities at home and work.",
+          "anchor": "family"
+        }
+      ]
+    },
+    {
+      "id": "to-wives",
+      "title": "To Wives",
+      "start": 104,
+      "end": 121,
+      "entries": [
+        {
+          "id": "to-wives-0",
+          "page": 104,
+          "type": "problem",
+          "label": "The family's experience of alcoholism",
+          "note": "The chapter introduces the harm and confusion experienced by partners.",
+          "anchor": "drinking"
+        },
+        {
+          "id": "to-wives-1",
+          "page": 109,
+          "type": "failed",
+          "label": "Control and argument often backfire",
+          "note": "Attempts to force a change in the drinker may intensify conflict.",
+          "anchor": "husband"
+        },
+        {
+          "id": "to-wives-2",
+          "page": 113,
+          "type": "turn",
+          "label": "A new approach for the partner",
+          "note": "The discussion turns toward understanding, restraint, and constructive responses.",
+          "anchor": "understand"
+        },
+        {
+          "id": "to-wives-3",
+          "page": 117,
+          "type": "action",
+          "label": "Make room for rebuilding trust",
+          "note": "Rebuilding life requires practical care beyond merely stopping alcohol.",
+          "anchor": "home"
+        },
+        {
+          "id": "to-wives-4",
+          "page": 120,
+          "type": "warning",
+          "label": "Recovery is not instant repair",
+          "note": "Families may need time and patient action even after drinking stops.",
+          "anchor": "patience"
+        }
+      ]
+    },
+    {
+      "id": "family-afterward",
+      "title": "The Family Afterward",
+      "start": 122,
+      "end": 135,
+      "entries": [
+        {
+          "id": "family-afterward-0",
+          "page": 122,
+          "type": "problem",
+          "label": "Sobriety doesn't fix every family difficulty",
+          "note": "A changed drinking pattern does not automatically erase old habits or hurt.",
+          "anchor": "family"
+        },
+        {
+          "id": "family-afterward-1",
+          "page": 125,
+          "type": "turn",
+          "label": "Recovery becomes a family process",
+          "note": "The focus shifts to mutual change, patience, and shared responsibility.",
+          "anchor": "family"
+        },
+        {
+          "id": "family-afterward-2",
+          "page": 127,
+          "type": "solution",
+          "label": "Progress rather than perfection at home",
+          "note": "Everyday behavior, balance, and humility matter more than grand promises.",
+          "anchor": "life"
+        },
+        {
+          "id": "family-afterward-3",
+          "page": 131,
+          "type": "action",
+          "label": "Rebuild ordinary family life",
+          "note": "Attention returns to recreation, relationships, and responsibilities.",
+          "anchor": "home"
+        },
+        {
+          "id": "family-afterward-4",
+          "page": 135,
+          "type": "warning",
+          "label": "Keep expectations proportionate",
+          "note": "Old conflicts can return; spiritual progress is an ongoing practice.",
+          "anchor": "family"
+        }
+      ]
+    },
+    {
+      "id": "to-employers",
+      "title": "To Employers",
+      "start": 136,
+      "end": 150,
+      "entries": [
+        {
+          "id": "to-employers-0",
+          "page": 136,
+          "type": "problem",
+          "label": "The workplace sees only the damage",
+          "note": "Employers confront absence, broken trust, and behavior they cannot easily explain.",
+          "anchor": "employee"
+        },
+        {
+          "id": "to-employers-1",
+          "page": 139,
+          "type": "failed",
+          "label": "Punishment alone misses the illness",
+          "note": "Routine discipline does not necessarily address alcoholism's underlying nature.",
+          "anchor": "drinking"
+        },
+        {
+          "id": "to-employers-2",
+          "page": 141,
+          "type": "turn",
+          "label": "A constructive, informed response",
+          "note": "The chapter turns toward understanding alcoholism and offering a realistic chance.",
+          "anchor": "alcoholism"
+        },
+        {
+          "id": "to-employers-3",
+          "page": 145,
+          "type": "action",
+          "label": "Set fair expectations and boundaries",
+          "note": "Support includes responsibility and sound decisions, not permissiveness.",
+          "anchor": "employee"
+        },
+        {
+          "id": "to-employers-4",
+          "page": 149,
+          "type": "solution",
+          "label": "Recovery can restore useful workers",
+          "note": "The chapter offers a practical reason for employers to consider another approach.",
+          "anchor": "work"
+        }
+      ]
+    },
+    {
+      "id": "a-vision-for-you",
+      "title": "A Vision for You",
+      "start": 151,
+      "end": 164,
+      "entries": [
+        {
+          "id": "a-vision-for-you-0",
+          "page": 151,
+          "type": "problem",
+          "label": "The old life narrows to isolation",
+          "note": "The last chapter begins by returning to alcohol's hopeless cycle.",
+          "anchor": "alcohol"
+        },
+        {
+          "id": "a-vision-for-you-1",
+          "page": 153,
+          "type": "turn",
+          "label": "The larger possibility appears",
+          "note": "The writing turns from what drinking has cost to the life recovery may open.",
+          "anchor": "life"
+        },
+        {
+          "id": "a-vision-for-you-2",
+          "page": 155,
+          "type": "solution",
+          "label": "Fellowship replaces isolation",
+          "note": "Shared identification and a common purpose are presented as powerful changes.",
+          "anchor": "fellowship"
+        },
+        {
+          "id": "a-vision-for-you-3",
+          "page": 159,
+          "type": "action",
+          "label": "The message spreads through service",
+          "note": "The story of the movement emphasizes practical help and connection.",
+          "anchor": "help"
+        },
+        {
+          "id": "a-vision-for-you-4",
+          "page": 164,
+          "type": "promise",
+          "label": "An open-ended vision of usefulness",
+          "note": "The book closes by directing attention toward continued growth and service.",
+          "anchor": "give"
+        }
+      ]
+    }
+  ]
+}
