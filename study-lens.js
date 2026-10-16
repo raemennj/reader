@@ -72,6 +72,11 @@
     }
     state.activeSourceId = "bbook";
     state.activeSectionBySource.set("bbook", sec.id);
+    if (window.AAStudyV2?.goToPrintedPage && Number.isInteger(entry.page)) {
+      hide();
+      window.AAStudyV2.goToPrintedPage(entry.page);
+      return;
+    }
     renderActiveSource();
     hide();
     window.requestAnimationFrame(function () {
