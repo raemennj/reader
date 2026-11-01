@@ -152,3 +152,11 @@
   pointer-events: none;
 }
 .daily-date-tooltip[hidden] { display: none !important; }
+
+.chapter-reading {
+  display: grid;
+  gap: .65rem;
+  margin-bottom: 1rem;
+}
+.chapter-reading summary { cursor: pointer; }
+.chapter-reading iframe { width: 100%; height: 70vh; border: 0; }

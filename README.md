@@ -5,7 +5,8 @@ reader and Study Lens. It is **not** the live ChatGPT-hosted Sites project.
 
 ## Included
 - Navigation and search for Big Book, Steps, Traditions, Dictionary, Daily Reflections.
-- Autoload sources from the owner's existing public GitHub repositories.
+- Load the 12&12 from the bundled `twlvxtwlv.json`. Chapter order and excerpts come from `raemennj/twlvxtwlv/data/twlvxtwlv.json`. The nine Step and three Tradition transcripts come from the same repository’s named verbatim files. Every reading links to its complete publisher PDF, with an optional inline preview. Reader search indexes the bundled text.
+- Autoload the other sources from the owner’s public GitHub repositories.
 - Big Book printed-page navigation including actual print markers inside chapters.
 - 60 independent study annotations, including 13 turning-point markers.
 - Optional coral God/Higher Power highlights, green Daily Reflections excerpts

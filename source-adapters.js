@@ -72,6 +72,8 @@
         if (/^(Step|Tradition)\s+(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|Eleven|Twelve)$/i.test(name) || /^Foreword$/i.test(name) || /^Traditions.?.?Long Form$/i.test(name)) {
           category = /^Tradition/i.test(name) ? "traditions" : category;
           current={id:"aa12-"+(++i),heading:name,paragraphs:[],pageNumbers:[],meta:{type:category==="steps"?"step":"tradition",startPage:b.pageNumber||null}};
+          current.meta.pdfPath = b.pdfPath;
+          current.meta.excerpt = b.excerpt;
           (category==="steps"?steps:traditions).push(current);
         }
         return;

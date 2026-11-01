@@ -4,7 +4,7 @@
   "use strict";
   const urls={
     bbook:"https://raw.githubusercontent.com/raemennj/bigb/main/big_book.json",
-    twlvxtwlv:"https://raw.githubusercontent.com/raemennj/twlvxtwlv/main/data/twlvxtwlv.json",
+    twlvxtwlv:"twlvxtwlv.json",
     dictionary:"https://raw.githubusercontent.com/raemennj/12x12glossary/main/glossary.json",
     daily:"https://raw.githubusercontent.com/raemennj/daily/main/data/daily_reflections.json"
   };
@@ -110,6 +110,36 @@
   const baseBookRender=renderBookSection;
   renderBookSection=(source,section)=>{
     baseBookRender(source,section);
+    if (section?.meta?.pdfPath) {
+      const url = new URL(section.meta.pdfPath, "https://www.aa.org");
+      if (url.origin === "https://www.aa.org" && url.pathname.startsWith("/sites/default/files/")) {
+        const panel = document.createElement("div");
+        panel.className = "chapter-reading";
+        const link = document.createElement("a");
+        link.href = url.href;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = "Read " + section.heading + " in full on AA.org (PDF)";
+        const preview = document.createElement("details");
+        const toggle = document.createElement("summary");
+        toggle.textContent = "Show the complete PDF here";
+        preview.append(toggle);
+        preview.addEventListener("toggle", () => {
+          if (!preview.open || preview.querySelector("iframe")) return;
+          const frame = document.createElement("iframe");
+          frame.src = url.href;
+          frame.title = section.heading + " — complete chapter";
+          preview.append(frame);
+        });
+        panel.append(link, preview);
+        if (section.meta.excerpt) {
+          const note = document.createElement("small");
+          note.textContent = "The searchable text below is an opening excerpt.";
+          panel.append(note);
+        }
+        elements.content.prepend(panel);
+      }
+    }
     if(!pageControl)return;
     pageControl.form.hidden=!["bbook","steps","traditions"].includes(source.id);
     if(pageControl.form.hidden||!section)return;
