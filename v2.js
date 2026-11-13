@@ -13,7 +13,7 @@
   normalizeSource=(id,data,label)=>window.AAStudyAdapters?.normalize(id,data,label)
       ||previousNormalize(id,data,label);
   const settingKey="aa-v2-highlight-layers";
-  const layers={god:true,daily:true,principle:true,pronouns:false};
+  const layers={must:true,god:true,daily:true,principle:true,pronouns:false};
   try{
     const stored=JSON.parse(localStorage.getItem(settingKey)||"{}");
     Object.keys(layers).forEach(k=>{if(typeof stored[k]==="boolean")layers[k]=stored[k];});
@@ -63,6 +63,7 @@
       (layers.daily||m.className!=="crossref") &&
       (layers.principle||m.className!=="principle"));
     const candidates=others.concat(godMarks(input));
+    if (layers.must) collectMatches(input, mustPattern(), "must-word", 3, candidates);
     if(!candidates.length)return [];
     const ends=[...new Set(candidates.flatMap(m=>[m.start,m.end]))].sort((a,b)=>a-b);
     const result=[];
@@ -193,6 +194,7 @@
     const legend=document.createElement("legend");legend.textContent="Highlight layers";
     group.appendChild(legend);
     [
+      ["must","Must","gold"],
       ["god","God / Higher Power","coral"],
       ["daily","Daily Reflections excerpts","green"],
       ["principle","Spiritual principles","violet"],
@@ -205,7 +207,8 @@
       checkbox.addEventListener("change",()=>{
         layers[key]=checkbox.checked;
         try{localStorage.setItem(settingKey,JSON.stringify(layers));}catch(e){}
-        renderActiveSource();
+        if (state.searchTerm) runSearch(state.searchTerm);
+        else renderActiveSource();
       });
       wrapper.append(checkbox,caption);group.appendChild(wrapper);
     });
