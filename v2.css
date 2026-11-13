@@ -160,3 +160,10 @@
 }
 .chapter-reading summary { cursor: pointer; }
 .chapter-reading iframe { width: 100%; height: 70vh; border: 0; }
+
+.highlight-layer[data-color="gold"] { border-left: 5px solid #c68a09; }
+mark.must-word { text-decoration: underline 2px #975e00; text-underline-offset: 2px; }
+mark.must-word:where(:not(.crossref, .principle, .hit, .dictionary-term)) {
+  background-color: #ffe396;
+  color: #382700;
+}
