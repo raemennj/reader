@@ -1620,7 +1620,12 @@ function searchParagraphs(term) {
   return { results, totalHits };
 }
 
+function mustPattern() {
+  return /\bmust(?:n['’]t)?\b/gi;
+}
+
 function countOccurrences(text, needleLower) {
+  if (needleLower === "must") return (String(text || "").match(mustPattern()) || []).length;
   if (!needleLower) return 0;
   const lower = String(text || "").toLowerCase();
   let count = 0;
@@ -1636,7 +1641,7 @@ function makeSnippet(text, term) {
   const safeText = String(text || "");
   const lower = safeText.toLowerCase();
   const needle = term.toLowerCase();
-  const idx = lower.indexOf(needle);
+  const idx = needle === "must" ? safeText.search(mustPattern()) : lower.indexOf(needle);
   if (idx === -1) {
     return safeText.slice(0, 140);
   }
@@ -1708,7 +1713,7 @@ function buildHighlightMatches(text, term, options = {}) {
   const used = [];
 
   if (term) {
-    const searchRegex = buildRegex([term], false);
+    const searchRegex = term.toLowerCase() === "must" ? mustPattern() : buildRegex([term], false);
     if (searchRegex) {
       collectMatches(text, searchRegex, "hit", 3, candidates);
     }
