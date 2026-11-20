@@ -135,7 +135,7 @@
         panel.append(link, preview);
         if (section.meta.excerpt) {
           const note = document.createElement("small");
-          note.textContent = "The searchable text below is an opening excerpt.";
+          note.textContent = "Selected text is searchable below. The PDF contains the complete reading.";
           panel.append(note);
         }
         elements.content.prepend(panel);
