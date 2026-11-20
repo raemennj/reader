@@ -273,3 +273,5 @@ body { background: #f2efe7; }
 #literatureList [aria-current] { color: #205e49; font-weight: bold; }
 #literatureList :disabled { opacity: .55; }
 #literatureList :focus-visible { outline-offset: -3px; }
+
+.print-page-marker > [data-label]::before { content: attr(data-label); }
