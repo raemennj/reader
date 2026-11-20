@@ -167,3 +167,49 @@ mark.must-word:where(:not(.crossref, .principle, .hit, .dictionary-term)) {
   background-color: #ffe396;
   color: #382700;
 }
+
+/* Keep library controls compact and give the daily entry a quiet reading surface. */
+:root {
+  --ink: #202d29;
+  --muted: #475951;
+  --accent: #80501c;
+  --accent-dark: #724216;
+  --accent-2: #195a47;
+  --panel: #fffdf8;
+  --shadow: 0 2px 8px rgba(32,45,41,.07);
+}
+body { background: #f2efe7; }
+.backdrop { display: none; }
+.app-shell { max-width: 68rem; }
+.top-bar { display: flex; flex-wrap: wrap; justify-content: space-between; }
+.top-nav { order: 3; width: 100%; flex-wrap: wrap; }
+.nav-item { font-size: .9rem; text-transform: none; letter-spacing: normal; min-height: 38px; }
+.library-tools { margin-left: auto; }
+.library-tools[open] { width: 100%; }
+.library-tools summary { cursor: pointer; padding: .6rem; color: var(--accent-2); font: 600 1rem system-ui,sans-serif; }
+.library-tools .toolbar { margin-top: .4rem; }
+.library-tools :is(input,form,div) { min-width: 0; }
+.content-grid:not(:has(#resultsList > *)) { grid-template-columns: minmax(0,1fr); max-width: 50rem; width: 100%; margin-inline: auto; }
+.results:has(#resultsList:empty), .reader:has(.daily-shell) .reader-header { display: none; }
+.daily-shell { --gloss-layer: none; --texture-layer: none; }
+.daily-shell .card {
+  background: #fffdf8;
+  --text: #202d29;
+  --muted: #475951;
+  color: var(--text);
+  box-shadow: none;
+  padding: clamp(1rem, 4vw, 2.5rem);
+}
+.daily-shell .card .day-wrap::before, .daily-shell .card .day-wrap::after { display: none; }
+.daily-shell .card .day-wrap { padding: 0; }
+.daily-shell .card .quote, .daily-shell .card .reflection {
+  font-family: var(--font-display);
+  font-size: calc(1.3rem * var(--type-scale));
+  line-height: 1.55;
+  color: var(--text);
+}
+.daily-shell .card .source { white-space: normal; overflow-wrap: anywhere; }
+.daily-shell .card .entry-nav { background: #233f34; flex-wrap: wrap; }
+.daily-shell .entry-nav button { color: #fffdf8; min-height: 40px; }
+.daily-shell .card .share-pill { color: #195a47; border-color: #688375; }
+:focus-visible { outline: 3px solid #357db5; outline-offset: 2px; }
