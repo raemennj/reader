@@ -1340,7 +1340,7 @@ function renderDailySection(source, section) {
   nav.appendChild(nextButton);
   nav.appendChild(randomButton);
   nav.appendChild(calendarButton);
-  card.appendChild(nav);
+
 
   const title = document.createElement("h2");
   title.textContent = meta.title || source.title;
@@ -1372,6 +1372,8 @@ function renderDailySection(source, section) {
     });
     card.appendChild(reflection);
   }
+
+  card.appendChild(nav);
 
   const tags = document.createElement("div");
   tags.className = "tags";
