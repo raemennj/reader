@@ -11,7 +11,7 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="app.css" />
-  <link rel="stylesheet" href="v2.css" />
+  <link rel="stylesheet" href="v2.css?v=literature-menu" />
 </head>
 <body>
   <div class="backdrop" aria-hidden="true">
@@ -24,14 +24,11 @@
       <div class="top-bar">
         <div class="brand-mark">AA Study Library</div>
         <nav id="topNav" class="top-nav" aria-label="Library">
-          <button id="navSteps" class="nav-item" type="button" data-source="steps">Steps</button>
-          <button id="navBigBook" class="nav-item" type="button" data-source="bbook">Big Book</button>
-          <button id="navTraditions" class="nav-item" type="button" data-source="traditions">Traditions</button>
+          <details id="literatureMenu">
+            <summary class="nav-item">Literature</summary>
+            <div id="literatureList"></div>
+          </details>
           <button id="navDictionary" class="nav-item" type="button" data-source="dictionary">Dictionary</button>
-          <button id="navDaily" class="nav-item" type="button" data-source="daily">Daily Reflections</button>
-          <select id="bookPicker" class="nav-item" aria-label="More books" style="max-width:100%">
-            <option value="">More books</option>
-          </select>
         </nav>
         <details class="library-tools">
           <summary>Search &amp; tools</summary>
@@ -65,26 +62,9 @@
     </header>
 
     <section id="dropdownArea" class="dropdown-area">
-      <div id="dropdownSteps" class="dropdown-panel" aria-label="Steps contents">
-        <div class="dropdown-header">Steps</div>
-        <div id="stepsList" class="dropdown-list"></div>
-      </div>
-      <div id="dropdownBigBook" class="dropdown-panel" aria-label="Big Book contents">
-        <div class="dropdown-header">Big Book</div>
-        <div id="bbookList" class="dropdown-list"></div>
-      </div>
-      <div id="dropdownTraditions" class="dropdown-panel" aria-label="Traditions contents">
-        <div class="dropdown-header">Traditions</div>
-        <div id="traditionsList" class="dropdown-list"></div>
-      </div>
       <div id="dropdownDictionary" class="dropdown-panel" aria-label="Dictionary contents">
         <div class="dropdown-header">Dictionary</div>
         <div id="dictionaryList" class="dropdown-list"></div>
-      </div>
-      <div id="dropdownDaily" class="dropdown-panel" aria-label="Daily reflections contents">
-        <div class="dropdown-header">Daily Reflections</div>
-        <div id="dailyMonthStrip" class="month-strip"></div>
-        <div id="dailyDayList" class="day-list compact"></div>
       </div>
     </section>
 
@@ -111,7 +91,7 @@
   <noscript class="noscript">This app needs JavaScript enabled to load the library.</noscript>
   <script src="app.js"></script>
   <script src="source-adapters.js"></script>
-  <script src="reading-books.js"></script>
+  <script src="reading-books.js?v=literature-menu"></script>
   <script src="v2.js"></script>
   <script src="study-lens.js"></script>
 </body>

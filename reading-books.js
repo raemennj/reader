@@ -193,11 +193,80 @@ function renderContinuousBook(source, selected) {
 }
 
 function syncBookPicker() {
-  const picker = document.getElementById("bookPicker");
-  if (picker.options.length === 1) {
-    for (const [id, title] of readingBooks) picker.add(new Option(title, id));
-    picker.onchange = () => { if (picker.value) { closeDropdown(); setActiveSource(picker.value); } };
+  const menu = document.getElementById("literatureMenu");
+  if (!menu) return;
+  const list = document.getElementById("literatureList");
+  const trigger = menu.querySelector("summary");
+  list.replaceChildren();
+
+  function openReading(id, section, paragraph) {
+    menu.open = false;
+    closeDropdown();
+    if (section) state.activeSectionBySource.set(id, section.id);
+    setActiveSource(id);
+    const target = paragraph == null ? (id === "daily" ? elements.content : elements.activeTitle) :
+      document.getElementById(buildParagraphId(state.sourceById.get(id).key, section.index, paragraph));
+    if (target) {
+      target.tabIndex = -1;
+      target.focus({preventScroll:true});
+      if (section || !readingBooks.has(id)) target.scrollIntoView({block:"start"});
+    }
   }
-  for (const option of Array.from(picker.options).slice(1)) option.disabled = !state.sourceById.has(option.value);
-  picker.value = readingBooks.has(state.activeSourceId) ? state.activeSourceId : "";
+
+  function button(label, action) {
+    const item = document.createElement("button");
+    item.type = "button";
+    item.textContent = label;
+    item.onclick = action;
+    return item;
+  }
+
+  for (const [id, title] of [["steps", "Twelve Steps"], ["traditions", "Twelve Traditions"],
+      ["bbook", "Big Book"], ["daily", "Daily Reflections"], ...readingBooks]) {
+    const source = state.sourceById.get(id);
+    const chapters = [];
+    if (source && readingBooks.has(id) && id !== "as-bill-sees-it") {
+      for (const page of source.sections) {
+        for (const [index, [pageId, paragraph]] of Object.entries(page.contentsTargets || {})) {
+          const target = source.sectionById.get(pageId);
+          if (target) chapters.push([page.paragraphs[index], target, paragraph]);
+        }
+      }
+    } else if (source && ["steps", "traditions", "bbook"].includes(id)) {
+      for (const section of source.sections) chapters.push([formatSectionLabel(section), section]);
+    }
+    let row;
+    if (chapters.length) {
+      const group = document.createElement("details");
+      group.name = "literature-chapters";
+      row = document.createElement("summary");
+      row.textContent = title;
+      group.append(row);
+      for (const [label, section, paragraph] of chapters) {
+        group.append(button(label, () => openReading(id, section, paragraph)));
+      }
+      list.append(group);
+    } else {
+      row = button(title, () => openReading(id));
+      row.disabled = !source;
+      list.append(row);
+    }
+    if (id === state.activeSourceId) row.setAttribute("aria-current", "true");
+  }
+  if (!menu.dataset.bound) {
+    menu.dataset.bound = "true";
+    menu.addEventListener("toggle", () => {
+      if (menu.open) closeDropdown();
+      else list.querySelectorAll("details[open]").forEach(group => group.open = false);
+    });
+    document.addEventListener("click", event => {
+      if (!menu.contains(event.target)) menu.open = false;
+    }, true);
+    menu.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        menu.open = false;
+        trigger.focus();
+      }
+    });
+  }
 }

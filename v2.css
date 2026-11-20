@@ -254,3 +254,22 @@ body { background: #f2efe7; }
 .book-position a { padding: .6rem .25rem; }
 
 .book-leaf h4.book-subheading { color: #294737; font-size: 1.16rem; line-height: 1.45; margin: 1.3rem 0 .6rem; }
+
+.app-header { position: relative; z-index: 5; }
+#topNav { position: relative; }
+#literatureMenu > summary { display: list-item; padding: 9px 16px; }
+#literatureList {
+  position: absolute; inset: 100% 0 auto; z-index: 20; margin: 4px auto;
+  width: min(100%, 32rem); max-height: 62vh; max-height: 62dvh; overflow: auto;
+  background: #fffdf8; border: 1px solid var(--panel-border); border-radius: 12px;
+  box-shadow: 0 8px 24px #192d242b; overscroll-behavior: contain;
+}
+#literatureList :is(summary, button) {
+  box-sizing: border-box; width: 100%; padding: 10px 16px; min-height: 44px;
+  font: inherit; text-align: left; cursor: pointer; border: 0;
+  border-bottom: 1px solid var(--panel-border); background: transparent; color: inherit;
+}
+#literatureList details button { padding-left: 32px; background: #f3f6f2; }
+#literatureList [aria-current] { color: #205e49; font-weight: bold; }
+#literatureList :disabled { opacity: .55; }
+#literatureList :focus-visible { outline-offset: -3px; }
