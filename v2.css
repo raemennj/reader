@@ -252,3 +252,5 @@ body { background: #f2efe7; }
 .book-contents a, .book-position a { color: #195a47; text-underline-offset: .18em; }
 .book-contents a { display: block; padding-block: .45rem; }
 .book-position a { padding: .6rem .25rem; }
+
+.book-leaf h4.book-subheading { color: #294737; font-size: 1.16rem; line-height: 1.45; margin: 1.3rem 0 .6rem; }
