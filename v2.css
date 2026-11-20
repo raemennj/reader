@@ -213,3 +213,33 @@ body { background: #f2efe7; }
 .daily-shell .entry-nav button { color: #fffdf8; min-height: 40px; }
 .daily-shell .card .share-pill { color: #195a47; border-color: #688375; }
 :focus-visible { outline: 3px solid #357db5; outline-offset: 2px; }
+
+.book-position {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+  padding: .45rem .65rem;
+  background: #fffdf8;
+  border-bottom: 1px solid #bccac2;
+  color: #354b40;
+  font: 600 .95rem system-ui, sans-serif;
+}
+.book-position select { flex: 1; min-width: 0; min-height: 44px; font: inherit; color: inherit; }
+.book-leaf { width: 100%; max-width: 65ch; margin-inline: auto; }
+.book-leaf, .book-leaf .para { scroll-margin-top: 4.5rem; }
+.book-leaf + .book-leaf { border-top: 1px solid #d4dcd6; }
+.book-leaf h3 { font: 600 1rem/1.45 system-ui, sans-serif; color: #365546; }
+.book-leaf p.para { line-height: 1.65; animation: none; }
+@media (max-width: 800px) {
+  .content-grid:has(.book-position):has(.result-item) .results { order: -1; max-height: 45vh; overflow: auto; }
+}
+
+.reader-content .book-leaf .para { font-size: 1.16rem; }
+.reader-content .book-leaf .para:first-of-type::first-letter {
+  font: inherit;
+  padding: 0;
+  float: none;
+}
