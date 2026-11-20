@@ -544,6 +544,7 @@ function normalizeSectionSource(id, data, fallbackTitle) {
       id: section.id || `${id}-section-${index + 1}`,
       heading,
       paragraphs: content.filter(Boolean),
+      paragraphRoles: Array.isArray(section.paragraphRoles) ? section.paragraphRoles : [],
       meta
     };
   });

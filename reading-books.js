@@ -93,6 +93,8 @@ function renderContinuousBook(source, selected) {
     page.paragraphs.forEach((text, p) => {
       const para = document.createElement("p");
       para.className = "para";
+      const role = page.paragraphRoles?.[p];
+      if (["source", "divider", "contents"].includes(role)) para.classList.add("book-" + role);
       para.id = buildParagraphId(source.key, page.index, p);
       para.textContent = text;
       block.append(para);
