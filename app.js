@@ -465,6 +465,7 @@ async function loadSources(forceReload) {
 }
 
 function clearLibrary() {
+  closeContinuousBook();
   state.sources = [];
   state.sourceById = new Map();
   state.activeSourceId = null;
@@ -802,6 +803,7 @@ function setActiveSource(sourceId) {
 }
 
 function renderActiveSource() {
+  closeContinuousBook();
   const source = state.sourceById.get(state.activeSourceId);
   if (!source) {
     renderEmptyReader();
@@ -849,8 +851,8 @@ function renderBookSection(source, section) {
   }
 
   if (readingBooks.has(source.id)) {
-    indexBookQuotations(source, state.sourceById.get("daily"));
-    elements.content.appendChild(bookPageControls(source, section));
+    renderContinuousBook(source, section);
+    return;
   }
   const wrapper = document.createElement("section");
   wrapper.className = "section-block";
@@ -879,8 +881,7 @@ function renderBookSection(source, section) {
       paragraphIndex + paragraphOffset
     );
     appendHighlightedText(paragraph, text, state.searchTerm, {
-      includeCrossrefs: true,
-      bookQuotes: source.quoteRanges?.get(section.id + "/" + paragraphIndex) || (readingBooks.has(source.id) ? [] : null)
+      includeCrossrefs: true
     });
     wrapper.appendChild(paragraph);
   });
