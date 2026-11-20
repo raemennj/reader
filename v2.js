@@ -62,7 +62,8 @@
     const others=baseHighlight(input,term,options).filter(m=>
       (layers.daily||m.className!=="crossref") &&
       (layers.principle||m.className!=="principle"));
-    const candidates=others.concat(godMarks(input));
+    const candidates=others.concat(godMarks(input), layers.daily ? options.bookQuotes || [] : []);
+    if (options.bookQuotes) collectDictionaryMatches(input, candidates);
     if (layers.must) collectMatches(input, mustPattern(), "must-word", 3, candidates);
     if(!candidates.length)return [];
     const ends=[...new Set(candidates.flatMap(m=>[m.start,m.end]))].sort((a,b)=>a-b);
@@ -268,3 +269,4 @@
   }
   document.addEventListener("DOMContentLoaded",()=>{setupPages();setupHighlightControls();installReflectionTooltips();});
 })();
+

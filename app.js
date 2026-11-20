@@ -848,6 +848,10 @@ function renderBookSection(source, section) {
     return;
   }
 
+  if (readingBooks.has(source.id)) {
+    indexBookQuotations(source, state.sourceById.get("daily"));
+    elements.content.appendChild(bookPageControls(source, section));
+  }
   const wrapper = document.createElement("section");
   wrapper.className = "section-block";
 
@@ -874,7 +878,10 @@ function renderBookSection(source, section) {
       section.index,
       paragraphIndex + paragraphOffset
     );
-    appendHighlightedText(paragraph, text, state.searchTerm, { includeCrossrefs: true });
+    appendHighlightedText(paragraph, text, state.searchTerm, {
+      includeCrossrefs: true,
+      bookQuotes: source.quoteRanges?.get(section.id + "/" + paragraphIndex) || (readingBooks.has(source.id) ? [] : null)
+    });
     wrapper.appendChild(paragraph);
   });
 
@@ -1408,6 +1415,7 @@ function getDefaultDailyId(source) {
 }
 
 function renderNav() {
+  syncBookPicker();
   SOURCE_ORDER.forEach((id) => {
     const button = elements.navButtons[id];
     if (!button) return;
@@ -1721,7 +1729,7 @@ function buildHighlightMatches(text, term, options = {}) {
     }
   }
 
-  if (options.includeCrossrefs && state.dailyQuotes.length) {
+  if (options.includeCrossrefs && !options.bookQuotes && state.dailyQuotes.length) {
     collectCrossRefMatches(text, state.dailyQuotes, candidates);
   }
 
@@ -2654,3 +2662,4 @@ async function cacheSource(id, label, data) {
     return;
   }
 }
+

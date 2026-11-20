@@ -135,7 +135,7 @@
   .print-page-form { padding: 7px; gap: 5px; }
   .print-page-form input { width: 65px; }
 }
-#content mark.crossref { cursor: pointer; }
+#content mark.crossref { background-color: #bbe8c5; color: #173b24; cursor: pointer; }
 #content mark.crossref:focus-visible { outline: 2px solid #27754f; outline-offset: 2px; }
 .daily-date-tooltip {
   position: fixed;
