@@ -248,3 +248,7 @@ body { background: #f2efe7; }
 .book-leaf .para:not(.book-source) + .book-source { margin-top: 1.25rem; }
 .book-leaf .para.book-divider { text-align: center; color: #52665c; margin: 1.25rem 0; }
 .book-leaf .para.book-contents { margin-block: .35rem; }
+
+.book-contents a, .book-position a { color: #195a47; text-underline-offset: .18em; }
+.book-contents a { display: block; padding-block: .45rem; }
+.book-position a { padding: .6rem .25rem; }
