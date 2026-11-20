@@ -132,6 +132,7 @@
           frame.title = section.heading + " — complete chapter";
           preview.append(frame);
         });
+        if (section.heading === "Traditions—Long Form") preview.open = true;
         panel.append(link, preview);
         if (section.meta.excerpt) {
           const note = document.createElement("small");
