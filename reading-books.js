@@ -65,7 +65,7 @@ function renderContinuousBook(source, selected) {
   indexBookQuotations(source, state.sourceById.get("daily"));
   elements.activeKicker.textContent = "";
   elements.activeTitle.textContent = source.title;
-  const controls = document.createElement("label");
+  const controls = document.createElement("div");
   controls.className = "book-position";
   controls.append("Page");
   const picker = document.createElement("select");
@@ -74,21 +74,46 @@ function renderContinuousBook(source, selected) {
   const pages = [];
   const pageNodes = document.createDocumentFragment();
   const painted = new Set();
+  const printedPages = new Map();
+  if (source.id === "as-bill-sees-it") {
+    for (const page of source.sections) {
+      const number = /^Page (\d+) · /.exec(page.heading)?.[1];
+      if (number) printedPages.set(number, page);
+    }
+  }
+  function pageLink(label, target) {
+    const link = document.createElement("a");
+    link.href = "#" + target.id;
+    link.textContent = label;
+    link.onclick = event => {
+      event.preventDefault();
+      jump(target.index);
+      pages[target.index].querySelector("h3").focus({preventScroll:true});
+    };
+    return link;
+  }
+  const contents = source.sections.find(page => page.paragraphRoles?.includes("contents"));
+  if (contents && printedPages.size) controls.append(pageLink("Contents", contents));
   function paint(index) {
     if (painted.has(index)) return;
     painted.add(index);
     const page = source.sections[index];
     const nodes = pages[index].querySelectorAll(".para");
-    page.paragraphs.forEach((text, p) => appendHighlightedText(nodes[p], text, state.searchTerm, {
+    page.paragraphs.forEach((text, p) => {
+      if (nodes[p].querySelector("a")) return;
+      appendHighlightedText(nodes[p], text, state.searchTerm, {
       includeCrossrefs: true, bookQuotes: source.quoteRanges.get(page.id + "/" + p) || []
-    }));
+      });
+    });
   }
   for (const page of source.sections) {
     picker.add(new Option(page.heading, page.id));
     const block = document.createElement("section");
     block.className = "book-leaf";
+    block.id = page.id;
     const heading = document.createElement("h3");
     heading.textContent = page.heading;
+    heading.tabIndex = -1;
     block.append(heading);
     page.paragraphs.forEach((text, p) => {
       const para = document.createElement("p");
@@ -96,7 +121,9 @@ function renderContinuousBook(source, selected) {
       const role = page.paragraphRoles?.[p];
       if (["source", "divider", "contents"].includes(role)) para.classList.add("book-" + role);
       para.id = buildParagraphId(source.key, page.index, p);
-      para.textContent = text;
+      const target = role === "contents" && printedPages.get(/(\d+)$/.exec(text)?.[1]);
+      if (target) para.append(pageLink(text, target));
+      else para.textContent = text;
       block.append(para);
     });
     pages.push(block);
