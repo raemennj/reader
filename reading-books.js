@@ -25,7 +25,7 @@ function indexBookQuotations(source, daily) {
     for (const fragment of quote.split(/…|\.(?:\s*\.){2,}/)) {
       const words = bookWords(fragment).map(token => token.word);
       if (words.length < 4) continue;
-      const width = Math.min(7, words.length);
+      const width = Math.min(12, words.length);
       for (let i = 0; i <= words.length - width; i++) {
         const key = words[i];
         if (!seeds.has(key)) seeds.set(key, []);
