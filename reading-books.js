@@ -81,19 +81,25 @@ function renderContinuousBook(source, selected) {
       if (number) printedPages.set(number, page);
     }
   }
-  function pageLink(label, target) {
+  function pageLink(label, target, paragraphIndex) {
     const link = document.createElement("a");
-    link.href = "#" + target.id;
+    link.href = "#" + (paragraphIndex === undefined ? target.id : buildParagraphId(source.key, target.index, paragraphIndex));
     link.textContent = label;
     link.onclick = event => {
       event.preventDefault();
       jump(target.index);
-      pages[target.index].querySelector("h3").focus({preventScroll:true});
+      const leaf = pages[target.index];
+      const destination = paragraphIndex === undefined ? leaf.querySelector("h3") : leaf.querySelectorAll(".para")[paragraphIndex];
+      if (paragraphIndex !== undefined) {
+        destination.tabIndex = -1;
+        destination.scrollIntoView({block:"start", behavior:"instant"});
+      }
+      destination.focus({preventScroll:true});
     };
     return link;
   }
   const contents = source.sections.find(page => page.paragraphRoles?.includes("contents"));
-  if (contents && printedPages.size) controls.append(pageLink("Contents", contents));
+  if (contents) controls.append(pageLink("Contents", contents));
   function paint(index) {
     if (painted.has(index)) return;
     painted.add(index);
@@ -107,7 +113,9 @@ function renderContinuousBook(source, selected) {
     });
   }
   for (const page of source.sections) {
-    picker.add(new Option(page.heading, page.id));
+    const subheading = page.paragraphRoles?.indexOf("subheading") ?? -1;
+    const caption = subheading >= 0 ? page.heading + " · " + page.paragraphs[subheading] : page.heading;
+    picker.add(new Option(caption, page.id));
     const block = document.createElement("section");
     block.className = "book-leaf";
     block.id = page.id;
@@ -116,13 +124,14 @@ function renderContinuousBook(source, selected) {
     heading.tabIndex = -1;
     block.append(heading);
     page.paragraphs.forEach((text, p) => {
-      const para = document.createElement("p");
-      para.className = "para";
       const role = page.paragraphRoles?.[p];
-      if (["source", "divider", "contents"].includes(role)) para.classList.add("book-" + role);
+      const para = document.createElement(role === "subheading" ? "h4" : "p");
+      para.className = "para";
+      if (["source", "divider", "contents", "subheading"].includes(role)) para.classList.add("book-" + role);
       para.id = buildParagraphId(source.key, page.index, p);
-      const target = role === "contents" && printedPages.get(/(\d+)$/.exec(text)?.[1]);
-      if (target) para.append(pageLink(text, target));
+      const explicit = page.contentsTargets?.[p];
+      const target = role === "contents" && (explicit ? source.sectionById.get(explicit[0]) : printedPages.get(/(\d+)$/.exec(text)?.[1]));
+      if (target) para.append(pageLink(text, target, explicit?.[1]));
       else para.textContent = text;
       block.append(para);
     });
