@@ -71,7 +71,7 @@
         if (/^THE TWELVE STEPS$/i.test(name)) { category="steps";current=null;return; }
         if (/^(Step|Tradition)\s+(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|Eleven|Twelve)$/i.test(name) || /^Foreword$/i.test(name) || /^Traditions.?.?Long Form$/i.test(name)) {
           category = /^Tradition/i.test(name) ? "traditions" : category;
-          current={id:"aa12-"+(++i),heading:name,paragraphs:[],pageNumbers:[],meta:{type:category==="steps"?"step":"tradition",startPage:b.pageNumber||null}};
+          current={id:"aa12-"+(++i),heading:name,paragraphs:[],pageNumbers:[],pageBreaks:[],meta:{type:category==="steps"?"step":"tradition",startPage:b.pageNumber||null}};
           current.meta.pdfPath = b.pdfPath;
           current.meta.excerpt = b.excerpt;
           (category==="steps"?steps:traditions).push(current);
@@ -81,7 +81,7 @@
       if (!current) return;
       var text = String(b.text || "");
       if (b.type === "list") text += " " + (b.items||[]).join("; ");
-      if (text) {current.paragraphs.push(text);current.pageNumbers.push(b.pageNumber||null);}
+      if (text) {current.paragraphs.push(text);current.pageNumbers.push(b.pageNumber||null);current.pageBreaks.push(b.pageBreaks||[]);}
     });
     function make(id,title,sections) {
       return {id:id,title:title,kind:"book",metadata:"Twelve Steps and Twelve Traditions",author:"Alcoholics Anonymous World Services",sections:sections,sectionById:indexSections(sections)};

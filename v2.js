@@ -86,21 +86,34 @@
   };
   let pageControl;
   function indexedPage(n){return Number.isInteger(n)&&n>0;}
-  function goToPrintedPage(page){
+  function goToPrintedPage(page, direction=0){
     if(!pageControl||!indexedPage(page))return;
     const source=state.sourceById.get(state.activeSourceId);
     if(!source)return;
     const pages=[];
-    source.sections.forEach(sec=>(sec.pageNumbers||[]).forEach((p,i)=>{
-      if(indexedPage(p))pages.push({number:p,section:sec,paragraph:i});
-    }));
+    const twelve = ["steps","traditions"].includes(source.id);
+    const sources = twelve ? ["steps","traditions"].map(id=>state.sourceById.get(id)).filter(Boolean) : [source];
+    for (const book of sources) {
+      for (const section of book.sections) {
+        (section.pageNumbers||[]).forEach((number,i)=>{
+          if(indexedPage(number)) pages.push({number,section,book});
+          for (const [,number] of section.pageBreaks?.[i] || []) pages.push({number,section,book});
+        });
+      }
+    }
+    if (twelve && direction) {
+      const numbers = pages.map(entry=>entry.number).filter(number=>direction>0 ? number>=page : number<=page);
+      if (!numbers.length) return;
+      page = direction>0 ? Math.min(...numbers) : Math.max(...numbers);
+    }
     const exact=pages.find(p=>p.number===page);
     const nearest=exact||pages.filter(p=>p.number<page).sort((a,b)=>b.number-a.number)[0];
     if(!nearest){
       pageControl.status.textContent="No indexed text at that page";
       return;
     }
-    state.activeSectionBySource.set(source.id,nearest.section.id);
+    state.activeSourceId=nearest.book.id;
+    state.activeSectionBySource.set(nearest.book.id,nearest.section.id);
     renderActiveSource();
     pageControl.input.value=String(page);
     pageControl.status.textContent=exact?"Print page "+page:"Closest indexed page "+nearest.number;
@@ -108,6 +121,17 @@
       const selector='#content .print-page-marker[data-print-page="'+nearest.number+'"]';
       document.querySelector(selector)?.scrollIntoView({behavior:"smooth",block:"start"});
     });
+  }
+  function pageMarker(number) {
+    const marker=document.createElement("span");
+    marker.className="print-page-marker";
+    marker.dataset.printPage=String(number);
+    marker.setAttribute("role","separator");
+    marker.setAttribute("aria-label","Print page "+number);
+    const label=document.createElement("span");
+    label.dataset.label="PRINT PAGE "+number;
+    marker.append(label);
+    return marker;
   }
   const baseBookRender=renderBookSection;
   renderBookSection=(source,section)=>{
@@ -151,15 +175,29 @@
     paragraphs.forEach((paragraph,i)=>{
       const p=pages[i];if(p===undefined||p===null)return;
       paragraph.dataset.printPage=String(p);
-      if(previous===p)return;
-      previous=p;count++;
-      const marker=document.createElement("div");
-      marker.className="print-page-marker";
-      marker.dataset.printPage=String(p);
-      const label=document.createElement("span");
-      label.textContent="PRINT PAGE "+p;
-      marker.appendChild(label);
-      paragraph.before(marker);
+      if(previous!==p) {
+        paragraph.before(pageMarker(p));
+        count++;
+      }
+      previous=p;
+      // Walk the original text nodes so a page boundary can fall inside a highlight.
+      const breaks=section.pageBreaks?.[i] || [];
+      if (!breaks.length) return;
+      const walker=document.createTreeWalker(paragraph,NodeFilter.SHOW_TEXT);
+      let node=walker.nextNode(), start=0;
+      for (const [offset,number] of breaks) {
+        while (node && start+node.length<=offset) {
+          start+=node.length;
+          node=walker.nextNode();
+        }
+        if (!node) break;
+        node=node.splitText(offset-start);
+        node.before(pageMarker(number));
+        walker.currentNode=node;
+        start=offset;
+        previous=number;
+        count++;
+      }
     });
     const first=pages.find(p=>p!==null&&p!==undefined);
     if(first!==undefined)pageControl.input.value=String(first);
@@ -186,8 +224,8 @@
     form.append(label,prev,input,next,submit,status);header.appendChild(form);
     pageControl={form,input,status};
     form.addEventListener("submit",e=>{e.preventDefault();goToPrintedPage(Number(input.value));});
-    prev.addEventListener("click",()=>goToPrintedPage(Number(input.value||1)-1));
-    next.addEventListener("click",()=>goToPrintedPage(Number(input.value||1)+1));
+    prev.addEventListener("click",()=>goToPrintedPage(Number(input.value||1)-1,-1));
+    next.addEventListener("click",()=>goToPrintedPage(Number(input.value||1)+1,1));
   }
   function setupHighlightControls(){
     const target=document.querySelector(".toolbar-right");if(!target)return;
